@@ -1,4 +1,4 @@
-import yaml
+import json
 import os
 
 def parse_github_actions_workflow(file_path):
@@ -14,11 +14,11 @@ def load_advisory_database(path):
     advisories = []
     for root, dirs, files in os.walk(path):
         for file in files:
-            if file.endswith('.yaml'):
+            if file.endswith('.json'):
                 file_path = os.path.join(root, file)
                 print(f"Reading advisory file: {file_path}")
                 with open(file_path, 'r') as f:
-                    advisory = yaml.safe_load(f)
+                    advisory = json.load(f)
                     advisories.append(advisory)
     print(f"Loaded {len(advisories)} advisories.")
     if advisories:
