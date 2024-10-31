@@ -15,7 +15,9 @@ def load_advisory_database(path):
     for root, dirs, files in os.walk(path):
         for file in files:
             if file.endswith('.yaml'):
-                with open(os.path.join(root, file), 'r') as f:
+                file_path = os.path.join(root, file)
+                print(f"Reading advisory file: {file_path}")
+                with open(file_path, 'r') as f:
                     advisory = yaml.safe_load(f)
                     advisories.append(advisory)
     print(f"Loaded {len(advisories)} advisories.")
