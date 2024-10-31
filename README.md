@@ -1,8 +1,13 @@
 # ActionGuard
 
 ActionGuard is a tool designed to enhance the security of GitHub Actions workflows by detecting potential security issues such as hardcoded secrets, deprecated actions, and insecure configurations.
+## Support ENGINEER AUTOMATION EMBEDDED SYSTEMS 
 
-## Features
+IM GRATEFULL , consider buying me a coffee! Your support is greatly appreciated.
+
+[![Buy Me a Coffee](https://img.shields.io/badge/Donate-Buy%20Me%20a%20Coffee-yellow)](https://paypal.me/barki0)
+
+ Features:
 
 - **Detection of Hardcoded Secrets**: Identifies hardcoded secrets in workflows.
 - **Detection of Deprecated Actions**: Flags the use of deprecated or insecure actions.
