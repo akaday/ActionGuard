@@ -18,7 +18,7 @@ def load_advisory_database(path):
             if file.endswith('.json'):
                 file_path = os.path.join(root, file)
                 print(f"Reading advisory file: {file_path}")
-                with open(file_path, 'r') as f:
+                with open(file_path, 'r', encoding='utf-8') as f:
                     advisory = json.load(f)
                     advisories.append(advisory)
     print(f"Loaded {len(advisories)} advisories.")
