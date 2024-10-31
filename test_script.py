@@ -1,10 +1,11 @@
+import yaml
 import json
 import os
 
 def parse_github_actions_workflow(file_path):
     try:
         with open(file_path, 'r') as file:
-            workflow = json.load(file)  # Ensure the sample workflow is in JSON format
+            workflow = yaml.safe_load(file)
         return workflow
     except FileNotFoundError:
         print(f"File not found: {file_path}")
@@ -40,5 +41,12 @@ def detect_known_vulnerabilities(workflow, advisories):
     return vulnerabilities_found
 
 # Example usage with non-vulnerable workflow
-workflow = parse_github_actions_workflow('sample_workflow.json')  # Make sure this is in JSON format
-advisories = load_advis
+workflow = parse_github_actions_workflow('sample_workflow.yml')
+advisories = load_advisory_database('advisory-database/advisories')
+vulnerabilities = detect_known_vulnerabilities(workflow, advisories)
+print('Known vulnerabilities found:', vulnerabilities)
+
+# Example usage with vulnerable workflow
+vulnerable_workflow = parse_github_actions_workflow('vulnerable_workflow.yml')
+vulnerabilities_in_vulnerable_workflow = detect_known_vulnerabilities(vulnerable_workflow, advisories)
+print('Known vulnerabilities found in vulnerable workflow:', vulnerabilities_in_vulnerable_workflow)
