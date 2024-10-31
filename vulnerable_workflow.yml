@@ -1,0 +1,11 @@
+name: CI
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1  # Deprecated action
+    - name: Set up Python
+      uses: actions/setup-python@v1  # Deprecated action
+    - name: Hardcoded secret
+      run: echo "SECRET_API_KEY=1234567890"
