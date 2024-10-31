@@ -18,6 +18,9 @@ def load_advisory_database(path):
                 with open(os.path.join(root, file), 'r') as f:
                     advisory = yaml.safe_load(f)
                     advisories.append(advisory)
+    print(f"Loaded {len(advisories)} advisories.")
+    if advisories:
+        print(f"Sample advisory: {advisories[0]}")
     return advisories
 
 def detect_known_vulnerabilities(workflow, advisories):
@@ -28,14 +31,15 @@ def detect_known_vulnerabilities(workflow, advisories):
         for step in steps:
             if 'uses' in step:
                 action = step['uses']
+                print(f"Checking action: {action}")
                 for advisory in advisories:
                     if action in advisory.get('affected', []):
                         vulnerabilities_found.append((job_id, step, advisory))
     return vulnerabilities_found
 
-# Example usage
+# Example usage with non-vulnerable workflow
 workflow = parse_github_actions_workflow('sample_workflow.yml')
-advisories = load_advisory_database('advisory-database')
+advisories = load_advisory_database('advisory-database/advisories')
 vulnerabilities = detect_known_vulnerabilities(workflow, advisories)
 print('Known vulnerabilities found:', vulnerabilities)
 
