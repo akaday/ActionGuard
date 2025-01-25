@@ -13,6 +13,8 @@ IM GRATEFULL , consider buying me a coffee! Your support is greatly appreciated.
 - **Detection of Deprecated Actions**: Flags the use of deprecated or insecure actions.
 - **Comprehensive Security Checks**: Scans for misconfigurations and permissions issues.
 - **User-Friendly Reporting**: Generates detailed reports of detected issues.
+- **Automated Update of Deprecated Actions List**: Ensures the list of deprecated actions is regularly updated.
+- **Version Comparison Mechanism**: Detects deprecated actions based on their version numbers.
 
 ## Getting Started
 
