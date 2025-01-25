@@ -86,6 +86,18 @@ def update_deprecated_actions_list():
         global deprecated_actions
         deprecated_actions = response.json().get('deprecated_actions', deprecated_actions)
 
+def detect_insecure_configurations(workflow):
+    insecure_configurations = []
+    jobs = workflow.get('jobs', {})
+    for job_id, job in jobs.items():
+        steps = job.get('steps', [])
+        for step in steps:
+            if 'run' in step:
+                run_command = step['run']
+                if 'sudo' in run_command or 'curl' in run_command:
+                    insecure_configurations.append((job_id, step))
+    return insecure_configurations
+
 # Example usage with non-vulnerable workflow
 workflow = parse_github_actions_workflow('sample_workflow.yml')
 advisories = load_advisory_database('advisory-database/advisories')
@@ -108,3 +120,7 @@ print('Version issues found:', version_issues)
 # Update deprecated actions list
 update_deprecated_actions_list()
 print('Updated deprecated actions list:', deprecated_actions)
+
+# Detect insecure configurations
+insecure_configurations_found = detect_insecure_configurations(workflow)
+print('Insecure configurations found:', insecure_configurations_found)
